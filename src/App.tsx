@@ -1,21 +1,39 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import FilmsList from "./components/FilmsList/FilmsList";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import FilmDetails from "./components/FilmDetails/FilmDetails";
+import Layout from "./components/Layout/Layout";
+import Home from "./components/Home/Home";
 
-function App({ films }: FilmsListProps) {
+function App() {
+  const { films } = useSelector((state: RootState) => state.films);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "",
+          element: <Home />,
+        },
+        {
+          path: "films",
+          element: <FilmsList films={films} />,
+        },
+        {
+          path: "films/:id",
+          element: <FilmDetails />,
+        },
+      ],
+    },
+  ]);
+
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <FilmsList films={films} />
+      <RouterProvider router={router} />
     </>
   );
 }
