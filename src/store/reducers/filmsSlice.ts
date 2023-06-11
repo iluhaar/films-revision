@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import films from "../../films.json";
 
-const initialState = { films };
+const initialState: initialStore = { films: [], isChanged: false };
 
 const filmsSlice = createSlice({
   name: "filmsReducer",
   initialState,
   reducers: {
+    updateFilms: (state, action) => {
+      state.films = action.payload;
+    },
     setIsWatched: (state, action) => {
       const data = action.payload;
       const selectedFilm = state.films.find((film) => film.id === data);
@@ -14,6 +16,7 @@ const filmsSlice = createSlice({
       if (!selectedFilm) return;
 
       selectedFilm.isWatched = !selectedFilm.isWatched;
+      state.isChanged = true;
     },
     addReview: (state, action) => {
       const data = action.payload;
@@ -22,10 +25,24 @@ const filmsSlice = createSlice({
       if (!selectedFilm) return;
 
       selectedFilm.review = data.review;
+      state.isChanged = true;
+    },
+    setGrade: (state, action) => {
+      const data = action.payload;
+      const selectedFilm = state.films.find((film) => film.id === data.id);
+
+      if (!selectedFilm) return;
+
+      selectedFilm.grade = data.value;
+      state.isChanged = true;
     },
   },
 });
 
-export const { setIsWatched, addReview } = filmsSlice.actions;
+export const { setIsWatched, addReview, setGrade, updateFilms } = filmsSlice.actions;
 
 export default filmsSlice;
+
+interface initialStore extends FilmsListProps {
+  isChanged: boolean;
+}

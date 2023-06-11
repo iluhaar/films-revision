@@ -1,14 +1,14 @@
+import type { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 import { toggleReviewForm } from "../../store/reducers/uiSlice";
 import { selectItemById } from "../../store/selectors/filmsSelectors";
-import type { RootState } from "../../store/store";
+
+import { useParams, Link } from "react-router-dom";
 
 import RatingComponent from "./RatingComponent/RatingComponent";
 import WatchedSwitch from "./WatchedSwitch/WatchedSwitch";
 import ReviewForm from "./ReviewForm/ReviewForm";
-import { useEffect } from "react";
 
 const FilmDetails = () => {
   const { id } = useParams();
@@ -17,9 +17,6 @@ const FilmDetails = () => {
   const dispatch = useDispatch();
 
   const film = useSelector((state: RootState) => selectItemById(state.films, id ? id : 1));
-  useEffect(() => {
-    console.log("🚀 ~ file: FilmDetails.tsx:19 ~ FilmDetails ~ {film}:", { film });
-  }, [film, id]);
 
   const onClickHandler = () => {
     dispatch(toggleReviewForm());
@@ -30,7 +27,9 @@ const FilmDetails = () => {
 
     return (
       <div>
-        {id}
+        <Link to="/films">
+          <button>Back to all films</button>
+        </Link>
         <h2>{name}</h2>
         <>
           <WatchedSwitch id={id} isWatched={isWatched} />
@@ -44,7 +43,7 @@ const FilmDetails = () => {
             </div>
           )}
         </>
-        <RatingComponent grade={grade} />
+        <RatingComponent grade={grade} id={id} />
       </div>
     );
   }
