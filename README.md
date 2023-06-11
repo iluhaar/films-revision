@@ -1,6 +1,6 @@
 # The App with films
 
-- that I wanna watch
+- wanna watch
 - already watched
 - score
 - **optional** review
