@@ -8,6 +8,7 @@ interface FilmProps {
   isWatched: boolean;
   grade: number | null;
   review: string;
+  img: string;
 }
 
 interface Grade {

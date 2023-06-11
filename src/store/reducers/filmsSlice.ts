@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: initialStore = { films: [], isChanged: false };
+const initialState: initialStore = {
+  films: [],
+  isChanged: false,
+  imagePlaceholder: "https://placehold.co/600x400?text=Movie",
+};
 
 const filmsSlice = createSlice({
   name: "filmsReducer",
@@ -45,4 +49,5 @@ export default filmsSlice;
 
 interface initialStore extends FilmsListProps {
   isChanged: boolean;
+  imagePlaceholder: string;
 }

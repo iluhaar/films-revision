@@ -1,14 +1,18 @@
 import type { RootState } from "../../store/store";
+
+import { useParams, Link } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { toggleReviewForm } from "../../store/reducers/uiSlice";
 import { selectItemById } from "../../store/selectors/filmsSelectors";
 
-import { useParams, Link } from "react-router-dom";
-
 import RatingComponent from "./RatingComponent/RatingComponent";
 import WatchedSwitch from "./WatchedSwitch/WatchedSwitch";
 import ReviewForm from "./ReviewForm/ReviewForm";
+
+//todo :
+// fix rating bug, after reload does not set;
 
 const FilmDetails = () => {
   const { id } = useParams();
