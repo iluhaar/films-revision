@@ -1,6 +1,7 @@
-import Switch from "@mui/material/Switch";
 import { useDispatch } from "react-redux";
 import { setIsWatched } from "../../../store/reducers/filmsSlice";
+
+import Switch from "@mui/material/Switch";
 
 export default function WatchedSwitch({ id, isWatched }: WatchedSwitch) {
   const dispatch = useDispatch();
