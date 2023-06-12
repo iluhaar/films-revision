@@ -28,5 +28,12 @@
 }
 
 .film-item {
+  width: 14rem !important;
   cursor: pointer;
+  min-width: 5rem;
+}
+.pagination__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

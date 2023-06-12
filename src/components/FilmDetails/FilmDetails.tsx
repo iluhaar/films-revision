@@ -35,7 +35,7 @@ const FilmDetails = () => {
         </Link>
         <>
           <FilmPosterComponent alt={name} src={img !== "" ? img : imagePlaceholder} isWatched={isWatched} />
-          <h2>{name}</h2>
+          <h2>{name.replace(/#фильм/g, "")}</h2>
         </>
         <>
           <WatchedSwitch id={id} isWatched={isWatched} />

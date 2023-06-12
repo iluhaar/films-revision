@@ -14,7 +14,7 @@ const FilmsList = ({ films }: FilmsListProps) => {
 
   const [page, setPage] = useState(1);
 
-  const PER_PAGE = 10;
+  const PER_PAGE = 15;
 
   const count = Math.ceil(films.length / PER_PAGE);
   const _DATA: any = usePagination(films, PER_PAGE);
@@ -28,7 +28,21 @@ const FilmsList = ({ films }: FilmsListProps) => {
 
   return (
     <>
-      <List sx={{ width: "100%", maxWidth: "50vw", marginTop: "10rem", bgcolor: "black" }}>
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: "75vw",
+          marginTop: "10rem",
+          bgcolor: "black",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "5rem",
+          height: "50vh",
+        }}
+      >
         {paginationData.map((film: FilmProps) => (
           <Link key={film.id} to={film.id.toString()}>
             <ListItem className="film-item">
@@ -39,15 +53,19 @@ const FilmsList = ({ films }: FilmsListProps) => {
                   isWatched={film.isWatched}
                 />
               </ListItemAvatar>
-              <ListItemText primary={film.name} />
+              <Divider orientation="vertical" variant="middle" flexItem />
+              <ListItemText
+                sx={{ padding: "0.5rem", textTransform: "capitalize" }}
+                primary={film.name.replace(/#фильм/g, "")}
+              />
             </ListItem>
             <Divider variant="inset" component="li" />
           </Link>
         ))}
       </List>
-      <>
+      <div className="pagination__wrapper">
         <Pagination count={count} page={page} onChange={handleChange} />
-      </>
+      </div>
     </>
   );
 };
