@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
 import usePagination from "../../hooks/Paganation";
 
 import { Avatar, ListItemAvatar, ListItemText, Pagination, List, ListItem, Divider } from "@mui/material";
+import { FilmPosterComponent } from "../FilmPosterComponent/FilmPosterComponent";
 
 const FilmsList = ({ films }: FilmsListProps) => {
   const { imagePlaceholder } = useSelector((state: RootState) => state.films);
@@ -32,7 +33,11 @@ const FilmsList = ({ films }: FilmsListProps) => {
           <Link key={film.id} to={film.id.toString()}>
             <ListItem className="film-item">
               <ListItemAvatar>
-                <Avatar alt={film.name} src={film.img !== "" ? film.img : imagePlaceholder} />
+                <FilmPosterComponent
+                  src={film.img !== "" ? film.img : imagePlaceholder}
+                  alt={film.name}
+                  isWatched={film.isWatched}
+                />
               </ListItemAvatar>
               <ListItemText primary={film.name} />
             </ListItem>
