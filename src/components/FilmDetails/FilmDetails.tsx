@@ -39,10 +39,9 @@ const FilmDetails = () => {
         </>
         <>
           <WatchedSwitch id={id} isWatched={isWatched} />
-          {isWatched ? " watched" : " not watched"}
+          {isWatched ? "watched" : " not watched"}
           {isWatched && (
             <div>
-              'review:'
               <button onClick={onClickHandler}>{!showReviewForm ? "Add Review" : "X"}</button>
               {showReviewForm && <ReviewForm id={id} />}
               {review && <p>{review}</p>}
