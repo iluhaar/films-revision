@@ -10,7 +10,6 @@ import { selectItemById } from "../../store/selectors/filmsSelectors";
 import RatingComponent from "./RatingComponent/RatingComponent";
 import WatchedSwitch from "./WatchedSwitch/WatchedSwitch";
 import ReviewForm from "./ReviewForm/ReviewForm";
-import { Avatar } from "@mui/material";
 import { FilmPosterComponent } from "../FilmPosterComponent/FilmPosterComponent";
 
 const FilmDetails = () => {
