@@ -29,14 +29,14 @@ const FilmDetails = () => {
     const { id, name, grade, isWatched, review, img } = film;
 
     return (
-      <div>
+      <div className="film-details">
         <Link to="/films">
           <button>Back to all films</button>
         </Link>
-        <>
+        <div className="film-details-info">
           <FilmPosterComponent alt={name} src={img !== "" ? img : imagePlaceholder} isWatched={isWatched} />
           <h2>{name.replace(/#фильм/g, "")}</h2>
-        </>
+        </div>
         <>
           <WatchedSwitch id={id} isWatched={isWatched} />
           {isWatched ? "watched" : " not watched"}
@@ -48,7 +48,7 @@ const FilmDetails = () => {
             </div>
           )}
         </>
-        <RatingComponent grade={grade} id={id} />
+        {isWatched && <RatingComponent grade={grade} id={id} />}
       </div>
     );
   }

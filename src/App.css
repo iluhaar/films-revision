@@ -32,6 +32,18 @@
   cursor: pointer;
   min-width: 5rem;
 }
+
+.film-details {
+  width: 25vw;
+}
+
+.film-details-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
 .pagination__wrapper {
   display: flex;
   align-items: center;

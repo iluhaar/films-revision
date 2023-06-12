@@ -14,7 +14,7 @@ const FilmsList = ({ films }: FilmsListProps) => {
 
   const [page, setPage] = useState(1);
 
-  const PER_PAGE = 15;
+  const PER_PAGE = 24;
 
   const count = Math.ceil(films.length / PER_PAGE);
   const _DATA: any = usePagination(films, PER_PAGE);
@@ -40,28 +40,29 @@ const FilmsList = ({ films }: FilmsListProps) => {
           alignItems: "center",
           justifyContent: "center",
           padding: "5rem",
-          height: "50vh",
+          height: "auto",
         }}
       >
-        {paginationData.map((film: FilmProps) => (
-          <Link key={film.id} to={film.id.toString()}>
-            <ListItem className="film-item">
-              <ListItemAvatar>
-                <FilmPosterComponent
-                  src={film.img !== "" ? film.img : imagePlaceholder}
-                  alt={film.name}
-                  isWatched={film.isWatched}
+        {paginationData &&
+          paginationData.map((film: FilmProps) => (
+            <Link key={film.id} to={film.id.toString()}>
+              <ListItem className="film-item">
+                <ListItemAvatar>
+                  <FilmPosterComponent
+                    src={film.img !== "" ? film.img : imagePlaceholder}
+                    alt={film.name}
+                    isWatched={film.isWatched}
+                  />
+                </ListItemAvatar>
+                <Divider orientation="vertical" variant="middle" flexItem />
+                <ListItemText
+                  sx={{ padding: "0.5rem", textTransform: "capitalize" }}
+                  primary={film.name.replace(/#фильм/g, "")}
                 />
-              </ListItemAvatar>
-              <Divider orientation="vertical" variant="middle" flexItem />
-              <ListItemText
-                sx={{ padding: "0.5rem", textTransform: "capitalize" }}
-                primary={film.name.replace(/#фильм/g, "")}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-          </Link>
-        ))}
+              </ListItem>
+              <Divider variant="inset" component="li" />
+            </Link>
+          ))}
       </List>
       <div className="pagination__wrapper">
         <Pagination count={count} page={page} onChange={handleChange} />
