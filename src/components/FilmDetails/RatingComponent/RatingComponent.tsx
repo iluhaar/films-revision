@@ -11,8 +11,10 @@ export default function RatingComponent({ grade, id }: RatingComponent) {
   const [hover, setHover] = useState(-1);
   const dispatch = useDispatch();
 
-  const setRatingHandler = () => {
-    dispatch(setGrade({ id, value }));
+  const setRatingHandler = (value: any) => {
+    const rating = value.target.value === undefined ? 0 : value.target.value;
+
+    dispatch(setGrade({ id, value: rating }));
   };
 
   return (
@@ -25,8 +27,7 @@ export default function RatingComponent({ grade, id }: RatingComponent) {
     >
       <Rating
         name="hover-feedback"
-        value={value}
-        defaultValue={grade ? grade : 0}
+        value={grade ? grade : value}
         precision={0.5}
         onChange={(_event, newValue) => {
           setValue(newValue);
@@ -35,7 +36,7 @@ export default function RatingComponent({ grade, id }: RatingComponent) {
           setHover(newHover);
         }}
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-        onClick={() => setRatingHandler()}
+        onClick={(event) => setRatingHandler(event)}
       />
     </Box>
   );

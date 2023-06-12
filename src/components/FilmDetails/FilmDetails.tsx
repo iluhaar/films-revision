@@ -11,9 +11,6 @@ import RatingComponent from "./RatingComponent/RatingComponent";
 import WatchedSwitch from "./WatchedSwitch/WatchedSwitch";
 import ReviewForm from "./ReviewForm/ReviewForm";
 
-//todo :
-// fix rating bug, after reload does not set;
-
 const FilmDetails = () => {
   const { id } = useParams();
 
@@ -21,6 +18,7 @@ const FilmDetails = () => {
   const dispatch = useDispatch();
 
   const film = useSelector((state: RootState) => selectItemById(state.films, id ? id : 1));
+  console.log("🚀 ~ file: FilmDetails.tsx:24 ~ FilmDetails ~ film:", film);
 
   const onClickHandler = () => {
     dispatch(toggleReviewForm());
