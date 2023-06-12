@@ -10,29 +10,34 @@ import { selectItemById } from "../../store/selectors/filmsSelectors";
 import RatingComponent from "./RatingComponent/RatingComponent";
 import WatchedSwitch from "./WatchedSwitch/WatchedSwitch";
 import ReviewForm from "./ReviewForm/ReviewForm";
+import { Avatar } from "@mui/material";
+import { FilmPosterComponent } from "../FilmPosterComponent/FilmPosterComponent";
 
 const FilmDetails = () => {
   const { id } = useParams();
+  const { imagePlaceholder } = useSelector((state: RootState) => state.films);
 
   const { showReviewForm } = useSelector((state: RootState) => state.ui);
   const dispatch = useDispatch();
 
   const film = useSelector((state: RootState) => selectItemById(state.films, id ? id : 1));
-  console.log("🚀 ~ file: FilmDetails.tsx:24 ~ FilmDetails ~ film:", film);
 
   const onClickHandler = () => {
     dispatch(toggleReviewForm());
   };
 
   if (film) {
-    const { id, name, grade, isWatched, review } = film;
+    const { id, name, grade, isWatched, review, img } = film;
 
     return (
       <div>
         <Link to="/films">
           <button>Back to all films</button>
         </Link>
-        <h2>{name}</h2>
+        <>
+          <FilmPosterComponent alt={name} src={img !== "" ? img : imagePlaceholder} isWatched={isWatched} />
+          <h2>{name}</h2>
+        </>
         <>
           <WatchedSwitch id={id} isWatched={isWatched} />
           {isWatched ? " watched" : " not watched"}
