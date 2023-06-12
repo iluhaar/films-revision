@@ -6,7 +6,7 @@ import { RootState } from "../../store/store";
 
 import usePagination from "../../hooks/Paganation";
 
-import { Avatar, ListItemAvatar, ListItemText, Pagination, List, ListItem, Divider } from "@mui/material";
+import { ListItemAvatar, ListItemText, Pagination, List, ListItem, Divider } from "@mui/material";
 import { FilmPosterComponent } from "../FilmPosterComponent/FilmPosterComponent";
 
 const FilmsList = ({ films }: FilmsListProps) => {
