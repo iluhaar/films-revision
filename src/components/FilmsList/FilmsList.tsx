@@ -8,6 +8,7 @@ import usePagination from "../../hooks/Paganation";
 
 import { ListItemAvatar, ListItemText, Pagination, List, ListItem, Divider } from "@mui/material";
 import { FilmPosterComponent } from "../FilmPosterComponent/FilmPosterComponent";
+import FilterWatched from "../UI/FilterWatched";
 
 const FilmsList = ({ films }: FilmsListProps) => {
   const { imagePlaceholder } = useSelector((state: RootState) => state.films);
@@ -28,45 +29,50 @@ const FilmsList = ({ films }: FilmsListProps) => {
 
   return (
     <>
-      <List
-        sx={{
-          width: "100%",
-          maxWidth: "75vw",
-          marginTop: "10rem",
-          bgcolor: "black",
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "5rem",
-          height: "auto",
-        }}
-      >
-        {paginationData &&
-          paginationData.map((film: FilmProps) => (
-            <Link key={film.id} to={film.id.toString()}>
-              <ListItem className="film-item">
-                <ListItemAvatar>
-                  <FilmPosterComponent
-                    src={film.img !== "" ? film.img : imagePlaceholder}
-                    alt={film.name}
-                    isWatched={film.isWatched}
+      {paginationData.length > 1 && (
+        <>
+          <List
+            sx={{
+              width: "100%",
+              maxWidth: "75vw",
+              marginTop: "10rem",
+              bgcolor: "black",
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "5rem",
+              height: "auto",
+            }}
+          >
+            <FilterWatched />
+
+            {paginationData.map((film: FilmProps) => (
+              <Link key={film.id} to={film.id.toString()}>
+                <ListItem className="film-item">
+                  <ListItemAvatar>
+                    <FilmPosterComponent
+                      src={film.img !== "" ? film.img : imagePlaceholder}
+                      alt={film.name}
+                      isWatched={film.isWatched}
+                    />
+                  </ListItemAvatar>
+                  <Divider orientation="vertical" variant="middle" flexItem />
+                  <ListItemText
+                    sx={{ padding: "0.5rem", textTransform: "capitalize" }}
+                    primary={film.name.replace(/#фильм/g, "")}
                   />
-                </ListItemAvatar>
-                <Divider orientation="vertical" variant="middle" flexItem />
-                <ListItemText
-                  sx={{ padding: "0.5rem", textTransform: "capitalize" }}
-                  primary={film.name.replace(/#фильм/g, "")}
-                />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-            </Link>
-          ))}
-      </List>
-      <div className="pagination__wrapper">
-        <Pagination count={count} page={page} onChange={handleChange} />
-      </div>
+                </ListItem>
+                <Divider variant="inset" component="li" />
+              </Link>
+            ))}
+          </List>
+          <div className="pagination__wrapper">
+            <Pagination count={count} page={page} onChange={handleChange} color="primary" />
+          </div>
+        </>
+      )}
     </>
   );
 };
