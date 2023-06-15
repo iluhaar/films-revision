@@ -57,7 +57,7 @@ const AddNewFilm = () => {
                 defaultValue=""
                 onChange={(e) => setImgURL(e.target.value)}
               />
-              <FormControlLabel control={<Checkbox defaultChecked />} label="Watched?" />
+              <FormControlLabel control={<Checkbox defaultChecked onChange={handleIsWatched} />} label="Label" />
               {isWatched && (
                 <TextField
                   required
