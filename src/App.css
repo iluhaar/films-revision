@@ -14,6 +14,7 @@
   will-change: filter;
   transition: filter 300ms;
   color: #61dafbaa;
+  z-index: 2;
 }
 .header-1:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
@@ -25,6 +26,8 @@
   left: 0;
   width: 100%;
   border: 2px solid #61dafbaa;
+  z-index: 1;
+  background-color: #242424;
 }
 
 .film-item {
