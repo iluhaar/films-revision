@@ -1,4 +1,4 @@
-# The App with films
+# The App with films and series
 
 - wanna watch
 - already watched
