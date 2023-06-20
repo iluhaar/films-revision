@@ -14,6 +14,7 @@ export const Notification = () => {
   }, [show]);
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    event && event.preventDefault();
     if (reason === "clickaway") {
       return;
     }

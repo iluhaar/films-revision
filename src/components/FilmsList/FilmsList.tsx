@@ -21,6 +21,8 @@ const FilmsList = ({ films }: FilmsListProps) => {
   const _DATA: any = usePagination(films, PER_PAGE);
 
   const handleChange = (e: any, p: any) => {
+    e.preventDefault();
+
     setPage(p);
     _DATA.jump(p);
   };
