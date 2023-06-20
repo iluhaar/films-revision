@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { Box, Checkbox, TextField, FormControlLabel } from "@mui/material";
 
-import ModalWrapper from "../UI/Modal";
+import ModalWrapper from "../UI/Modals/Modal";
 import { useDispatch } from "react-redux";
 import { addNewFilm } from "../../store/reducers/filmsSlice";
 
@@ -57,7 +57,7 @@ const AddNewFilm = () => {
                 defaultValue=""
                 onChange={(e) => setImgURL(e.target.value)}
               />
-              <FormControlLabel control={<Checkbox defaultChecked onChange={handleIsWatched} />} label="Label" />
+              <FormControlLabel control={<Checkbox defaultChecked onChange={handleIsWatched} />} label="Watched?" />
               {isWatched && (
                 <TextField
                   required
@@ -68,8 +68,8 @@ const AddNewFilm = () => {
                 />
               )}
             </div>
-            <button>Add new film/series</button>
           </Box>
+          <button>Add new film/series</button>
         </ModalWrapper>
       )}
     </>
