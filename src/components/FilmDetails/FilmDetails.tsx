@@ -30,7 +30,7 @@ const FilmDetails = () => {
 
     return (
       <div className="film-details">
-        <Link to="/films">
+        <Link to="/films-revision/films">
           <button>Back to all films</button>
         </Link>
         <div className="film-details-info">

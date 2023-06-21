@@ -7,7 +7,7 @@ const HeaderComponent = () => {
   return (
     <>
       <header className="sticky-header">
-        <Link to="/">
+        <Link to="/films-revision/">
           <h1 className="header-1">Films revision</h1>
         </Link>
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "flex-end" }}></div>

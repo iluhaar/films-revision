@@ -36,7 +36,7 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/films-revision/",
       element: <Layout />,
       children: [
         {
