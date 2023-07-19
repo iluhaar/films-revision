@@ -37,15 +37,22 @@
   min-width: 5rem;
 }
 
-.film-details {
+.film-details__wrapper {
   width: 25vw;
+}
+
+.film-details {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .film-details-info {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  padding: 1rem;
 }
 
 .pagination__wrapper {
