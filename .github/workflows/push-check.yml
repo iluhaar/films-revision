@@ -1,0 +1,24 @@
+name: Changelog Check
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  checkChangelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check Changelog
+        run: |
+          git diff --name-only HEAD^ HEAD | grep -q 'changelog\.md'
+          if [ $? -eq 0 ]; then
+            echo "Changelog file has been updated or changed."
+          else
+            echo "No changes detected in the changelog file."
+            exit 1
+          fi

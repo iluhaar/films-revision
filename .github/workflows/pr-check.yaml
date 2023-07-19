@@ -1,0 +1,23 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  check-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check Changelog
+        run: |
+          changelog_diff=$(git diff --name-only origin/main...$GITHUB_SHA | grep "Changelog")
+          if [ -z "$changelog_diff" ]; then
+            echo "Error: Please update the changelog"
+            exit 1
+          fi

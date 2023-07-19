@@ -38,7 +38,7 @@ export const FilmPosterComponent = ({ src, alt, isWatched, showImage }: FilmPost
   return (
     <Stack direction="row" spacing={2}>
       <StyledBadge overlap="circular" anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant={variant}>
-        <Avatar
+      <Avatar
           alt={alt}
           src={src}
           sx={{ width: 56, height: 56 }}
