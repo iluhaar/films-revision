@@ -9,7 +9,7 @@ import { setGrade } from "../../../store/reducers/filmsSlice";
 export default function RatingComponent({ grade, id }: RatingComponent) {
   const [value, setValue] = useState<number | null>(0);
   const [hover, setHover] = useState(-1);
-  console.info("🚀 ~ file: RatingComponent.tsx:12 ~ RatingComponent ~ hover:", hover);
+  // console.info("🚀 ~ file: RatingComponent.tsx:12 ~ RatingComponent ~ hover:", hover);
   const dispatch = useDispatch();
 
   const setRatingHandler = (value: any) => {
