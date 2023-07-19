@@ -38,7 +38,12 @@ export const FilmPosterComponent = ({ src, alt, isWatched, showImage }: FilmPost
   return (
     <Stack direction="row" spacing={2}>
       <StyledBadge overlap="circular" anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant={variant}>
-        <Avatar alt={alt} src={src} sx={{ width: 56, height: 56 }} onClick={() => showImage(true)} />
+        <Avatar
+          alt={alt}
+          src={src}
+          sx={{ width: 56, height: 56 }}
+          onClick={() => showImage !== undefined && showImage(true)}
+        />
       </StyledBadge>
     </Stack>
   );
@@ -48,5 +53,5 @@ interface FilmPosterComponent {
   src: string;
   alt: string;
   isWatched: boolean;
-  showImage: any;
+  showImage?: (arg: boolean) => boolean;
 }

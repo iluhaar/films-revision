@@ -1,3 +1,5 @@
+import type { ChangeEvent } from "react";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -18,9 +20,9 @@ const FilmsList = ({ films }: FilmsListProps) => {
   const PER_PAGE = 24;
 
   const count = Math.ceil(films.length / PER_PAGE);
-  const _DATA: any = usePagination(films, PER_PAGE);
+  const _DATA = usePagination(films, PER_PAGE);
 
-  const handleChange = (e: any, p: any) => {
+  const handleChange = (e: ChangeEvent<unknown>, p: number) => {
     e.preventDefault();
 
     setPage(p);
