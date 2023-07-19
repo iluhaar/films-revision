@@ -1,3 +1,5 @@
+import type { MouseEvent } from "react";
+
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
@@ -14,7 +16,7 @@ const ReviewForm = ({ id }: Props) => {
 
   const dispatch = useDispatch();
 
-  const onSubmitHandler = (e: any) => {
+  const onSubmitHandler = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     dispatch(addReview({ id, review: reviewText }));
     dispatch(toggleReviewForm());
@@ -40,7 +42,7 @@ const ReviewForm = ({ id }: Props) => {
           variant="filled"
           placeholder="Write a review.."
         />
-        <button onClick={onSubmitHandler}>Add</button>
+        <button onClick={(event) => onSubmitHandler(event)}>Add</button>
       </>
     </Box>
   );

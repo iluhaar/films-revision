@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function usePagination(data: any, itemsPerPage: any) {
+function usePagination(data: FilmProps[], itemsPerPage: number) {
   const [currentPage, setCurrentPage] = useState(1);
   const maxPage = Math.ceil(data.length / itemsPerPage);
 
