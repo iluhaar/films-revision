@@ -40,31 +40,33 @@ const FilmDetails = () => {
             <img src={img !== "" ? img : imagePlaceholder} className="" />
           </ModalWrapper>
         )}
-        <div className="film-details">
+        <div className="film-details__wrapper">
           <Link to="/films-revision/films">
             <button>Back to all films</button>
           </Link>
-          <div className="film-details-info">
+          <div className="film-details">
             <FilmPosterComponent
               alt={name}
               src={img !== "" ? img : imagePlaceholder}
               isWatched={isWatched}
               showImage={setShowFullImg}
+              page="details"
             />
-            <h2>{name.replace(/#фильм/g, "")}</h2>
+            <div className="film-details-info">
+              <h2>{name.replace(/#фильм/g, "")}</h2>
+              <>
+                <WatchedSwitch id={id} isWatched={isWatched} />
+                {isWatched && (
+                  <div>
+                    <button onClick={onClickHandler}>{!showReviewForm ? "Add Review" : "X"}</button>
+                    {showReviewForm && <ReviewForm id={id} />}
+                    {review && <p>{review}</p>}
+                  </div>
+                )}
+              </>
+              {isWatched && <RatingComponent grade={grade} id={id} />}
+            </div>
           </div>
-          <>
-            <WatchedSwitch id={id} isWatched={isWatched} />
-            {isWatched ? "watched" : " not watched"}
-            {isWatched && (
-              <div>
-                <button onClick={onClickHandler}>{!showReviewForm ? "Add Review" : "X"}</button>
-                {showReviewForm && <ReviewForm id={id} />}
-                {review && <p>{review}</p>}
-              </div>
-            )}
-          </>
-          {isWatched && <RatingComponent grade={grade} id={id} />}
         </div>
       </>
     );

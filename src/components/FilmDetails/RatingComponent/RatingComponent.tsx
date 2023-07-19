@@ -41,6 +41,7 @@ export default function RatingComponent({ grade, id }: RatingComponent) {
         width: 200,
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Rating
