@@ -14,6 +14,8 @@ import WatchedSwitch from "./WatchedSwitch/WatchedSwitch";
 import ReviewForm from "./ReviewForm/ReviewForm";
 import { FilmPosterComponent } from "../FilmPosterComponent/FilmPosterComponent";
 import ModalWrapper from "../UI/Modals/ImageModal";
+import EditFilmComponent from "../EditFilm/EditFilmComponent";
+import { Box } from "@mui/material";
 
 const FilmDetails = () => {
   const [showFullImg, setShowFullImg] = useState(false);
@@ -53,7 +55,10 @@ const FilmDetails = () => {
               page="details"
             />
             <div className="film-details-info">
-              <h2>{name.replace(/#фильм/g, "")}</h2>
+              <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "2rem" }}>
+                <h2>{name.replace(/#фильм/g, "").toUpperCase()}</h2>
+                <EditFilmComponent film={film} />
+              </Box>
               <>
                 <WatchedSwitch id={id} isWatched={isWatched} />
                 {isWatched && (

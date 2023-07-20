@@ -79,7 +79,6 @@ const filmsSlice = createSlice({
         state.films = sorted;
       }
     },
-
     searchFilm: (state, action) => {
       const title = action.payload.searchTerm;
       if (title != "") {
@@ -90,10 +89,29 @@ const filmsSlice = createSlice({
         state.films = state.initialFilms;
       }
     },
+
+    updateFilmData: (state, action) => {
+      const { id, name, grade, img, isWatched, review } = action.payload;
+      const films = state.films;
+
+      const findFilm = films.findIndex((film) => film.id === id);
+
+      if (findFilm !== -1) {
+        films[findFilm] = {
+          ...films,
+          name: name,
+          grade: grade,
+          img: img,
+          isWatched: isWatched,
+          review: review,
+          id: id,
+        };
+      }
+    },
   },
 });
 
-export const { setIsWatched, addReview, setGrade, updateFilms, addNewFilm, filterFilms, searchFilm } =
+export const { setIsWatched, addReview, setGrade, updateFilms, addNewFilm, filterFilms, searchFilm, updateFilmData } =
   filmsSlice.actions;
 
 export default filmsSlice;
