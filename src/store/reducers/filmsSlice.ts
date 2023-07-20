@@ -85,7 +85,7 @@ const filmsSlice = createSlice({
       if (title != "") {
         const result = state.films.filter((film) => film.name.toLocaleLowerCase().includes(title.toLocaleLowerCase()));
 
-        state.films = result;
+        state.films = result.length > 0 ? result : state.initialFilms;
       } else {
         state.films = state.initialFilms;
       }
