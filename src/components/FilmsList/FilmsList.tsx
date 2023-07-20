@@ -8,9 +8,10 @@ import { RootState } from "../../store/store";
 
 import usePagination from "../../hooks/Paganation";
 
-import { ListItemAvatar, ListItemText, Pagination, List, ListItem, Divider } from "@mui/material";
+import { ListItemAvatar, ListItemText, Pagination, List, ListItem, Divider, Box } from "@mui/material";
 import { FilmPosterComponent } from "../FilmPosterComponent/FilmPosterComponent";
 import FilterWatched from "../UI/FilterWatched";
+import SearchComponent from "../UI/SearchComponent/SearchComponent";
 
 const FilmsList = ({ films }: FilmsListProps) => {
   const { imagePlaceholder } = useSelector((state: RootState) => state.films);
@@ -33,7 +34,7 @@ const FilmsList = ({ films }: FilmsListProps) => {
 
   return (
     <>
-      {paginationData.length > 1 && (
+      {paginationData.length > 0 && (
         <>
           <List
             sx={{
@@ -50,7 +51,10 @@ const FilmsList = ({ films }: FilmsListProps) => {
               height: "auto",
             }}
           >
-            <FilterWatched />
+            <Box>
+              <FilterWatched />
+              <SearchComponent />
+            </Box>
 
             {paginationData.map((film: FilmProps) => (
               <Link key={film.id} to={film.id.toString()}>
