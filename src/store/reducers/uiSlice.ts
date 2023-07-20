@@ -10,6 +10,7 @@ const initialState = {
     message: "",
     type: "",
   },
+  isAuth: false,
 };
 
 const uiSlice = createSlice({
@@ -28,9 +29,13 @@ const uiSlice = createSlice({
         type: action.payload.type,
       };
     },
+
+    setAuth: (state, action) => {
+      state.isAuth = action.payload.status;
+    },
   },
 });
 
-export const { toggleReviewForm, showNotification } = uiSlice.actions;
+export const { toggleReviewForm, showNotification, setAuth } = uiSlice.actions;
 
 export default uiSlice;
