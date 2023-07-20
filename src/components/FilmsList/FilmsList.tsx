@@ -14,7 +14,6 @@ import FilterWatched from "../UI/FilterWatched";
 import SearchComponent from "../UI/SearchComponent/SearchComponent";
 
 const FilmsList = ({ films }: FilmsListProps) => {
-  console.info("🚀 ~ file: FilmsList.tsx:17 ~ FilmsList ~ films:", films);
   const { imagePlaceholder } = useSelector((state: RootState) => state.films);
 
   const [page, setPage] = useState(1);
