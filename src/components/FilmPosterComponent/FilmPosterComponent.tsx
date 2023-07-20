@@ -8,6 +8,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     backgroundColor: "#44b700",
     color: "#44b700",
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    zIndex: "auto",
     "&::after": {
       position: "absolute",
       top: 0,
@@ -32,14 +33,30 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-export const FilmPosterComponent = ({ src, alt, isWatched }: FilmPosterComponent) => {
+export const FilmPosterComponent = ({ src, alt, isWatched, showImage, page }: FilmPosterComponent) => {
   const variant = isWatched ? "dot" : "standard";
 
   return (
     <Stack direction="row" spacing={2}>
-      <StyledBadge overlap="circular" anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant={variant}>
-        <Avatar alt={alt} src={src} sx={{ width: 56, height: 56 }} />
-      </StyledBadge>
+      {page === "details" ? (
+        <div style={{ paddingTop: "1rem" }}>
+          <img src={`${src}`} srcSet={`${src}`} alt={alt} width="250px" />
+        </div>
+      ) : (
+        <StyledBadge
+          overlap="circular"
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          variant={variant}
+          sx={{ zIndex: "auto" }}
+        >
+          <Avatar
+            alt={alt}
+            src={src}
+            sx={{ width: 56, height: 56 }}
+            onClick={() => showImage !== undefined && showImage(true)}
+          />
+        </StyledBadge>
+      )}
     </Stack>
   );
 };
@@ -48,4 +65,6 @@ interface FilmPosterComponent {
   src: string;
   alt: string;
   isWatched: boolean;
+  showImage?: (arg: boolean) => void;
+  page?: string;
 }

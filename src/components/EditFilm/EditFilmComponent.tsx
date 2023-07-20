@@ -1,21 +1,19 @@
-import type { SyntheticEvent } from "react";
-import { useState } from "react";
-
-import { Box, Checkbox, TextField, FormControlLabel, Typography } from "@mui/material";
-
+import { SyntheticEvent, useEffect, useState } from "react";
 import ModalWrapper from "../UI/Modals/Modal";
+import { Box, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material";
+
+import styles from "./edit.module.css";
 import { useDispatch } from "react-redux";
-import { addNewFilm } from "../../store/reducers/filmsSlice";
 
-import styles from "./addNew.module.css";
+import { updateFilmData } from "../../store/reducers/filmsSlice";
 
-const AddNewFilm = () => {
+const EditFilmComponent = ({ film }: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [filmName, setFilmName] = useState("");
-  const [grade, setGrade] = useState(0);
+  const [grade, setGrade] = useState<number | null>(0);
   const [imgURL, setImgURL] = useState("");
   const [review, setReview] = useState("");
   const [isWatched, setIsWatched] = useState(false);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -26,32 +24,43 @@ const AddNewFilm = () => {
   const handlerSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    dispatch(addNewFilm({ name: filmName, grade, img: imgURL, review, isWatched }));
+    dispatch(updateFilmData({ id: film.id, name: filmName, grade, img: imgURL, review, isWatched }));
+
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    setFilmName(film.name);
+    setGrade(film.grade);
+    setImgURL(film.img);
+    setReview(film.review);
+    setIsWatched(film.isWatched);
+  }, [film.grade, film.img, film.isWatched, film.name, film.review]);
+
   return (
     <>
-      {!isOpen && <button onClick={() => setIsOpen(true)}>Add new film/series</button>}
+      {!isOpen && <button onClick={() => setIsOpen(true)}>Edit</button>}
+
       {isOpen && (
         <ModalWrapper setIsOpen={setIsOpen}>
           <Box component="form" onSubmit={handlerSubmit}>
             <Typography variant="h3" sx={{ color: "#f3f3f3", paddingBottom: "1rem" }}>
-              Add new film or series
+              Edit film/series
             </Typography>
-            <div className={styles.addNew__wrapper}>
+            <div className={styles.edit__wrapper}>
               <TextField
                 required
                 id="outlined-required"
                 label="Film/Series Name"
-                defaultValue=""
+                defaultValue={filmName}
+                value={film.name === "" ? filmName : film.name}
                 onChange={(e) => setFilmName(e.target.value)}
               />
               <TextField
                 required
                 id="outlined-required"
                 label="Grade"
-                defaultValue=""
+                defaultValue={grade}
                 type="text"
                 onChange={(e) => setGrade(Number(e.target.value))}
               />
@@ -59,26 +68,36 @@ const AddNewFilm = () => {
                 required
                 id="outlined-required"
                 label="Image url"
-                defaultValue=""
+                defaultValue={imgURL}
                 onChange={(e) => setImgURL(e.target.value)}
               />
-              <FormControlLabel control={<Checkbox defaultChecked onChange={handleIsWatched} />} label="Watched?" />
+              <FormControlLabel
+                control={<Checkbox defaultChecked={isWatched} onChange={handleIsWatched} />}
+                label="Watched?"
+              />
               {isWatched && (
                 <TextField
                   required
                   id="outlined-required"
                   label="Review"
-                  defaultValue=""
+                  defaultValue={review}
                   onChange={(e) => setReview(e.target.value)}
                 />
               )}
             </div>
+
+            <button type="submit" onClick={handlerSubmit}>
+              Update
+            </button>
           </Box>
-          <button className={styles.addNew__button}>Add new film/series</button>
         </ModalWrapper>
       )}
     </>
   );
 };
 
-export default AddNewFilm;
+export default EditFilmComponent;
+
+interface Props {
+  film: FilmProps;
+}

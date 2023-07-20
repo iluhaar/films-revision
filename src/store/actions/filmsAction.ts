@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { updateFilms } from "../reducers/filmsSlice";
 import { showNotification } from "../reducers/uiSlice";
+import { Dispatch } from "@reduxjs/toolkit";
 
-export const getFilms: any = () => {
-  return async (dispatch: any) => {
+export const getFilms = (): any => {
+  return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
       const response = await fetch("https://films-revision-default-rtdb.firebaseio.com/films.json");
 
@@ -22,6 +24,7 @@ export const getFilms: any = () => {
 
       dispatch(
         showNotification({
+          show: true,
           status: "success",
           title: "Success",
           message: "Fetched films data successfully!",
@@ -29,10 +32,9 @@ export const getFilms: any = () => {
         })
       );
     } catch (error) {
-      console.log("🚀 ~ file: cartActions.js:70 ~ return ~ cartData:", error);
-
       dispatch(
         showNotification({
+          show: true,
           status: "error",
           title: "Error",
           message: "Failed to fetch films data!",
@@ -43,8 +45,8 @@ export const getFilms: any = () => {
   };
 };
 
-export const sendFilms: any = (films: FilmsListProps) => {
-  return async (dispatch: any) => {
+export const sendFilms = (films: FilmProps[]): any => {
+  return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
       const response = await fetch("https://films-revision-default-rtdb.firebaseio.com/films.json", {
         method: "PUT",
@@ -64,6 +66,7 @@ export const sendFilms: any = (films: FilmsListProps) => {
 
       dispatch(
         showNotification({
+          show: true,
           status: "success",
           title: "Success",
           message: "Film review is updated",
@@ -73,6 +76,7 @@ export const sendFilms: any = (films: FilmsListProps) => {
     } catch (error) {
       dispatch(
         showNotification({
+          show: true,
           status: "error",
           title: "Error",
           message: "Failed to send films data!",

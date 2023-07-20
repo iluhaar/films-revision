@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: initialStore = {
   films: [],
   isChanged: false,
   imagePlaceholder: "https://placehold.co/600x400?text=Movie",
+  initialFilms: [],
 };
 
 const filmsSlice = createSlice({
@@ -13,7 +15,6 @@ const filmsSlice = createSlice({
     addNewFilm: (state, action) => {
       const newFilm = action.payload;
       const lastId = state?.films?.at(-1)?.id ?? Math.ceil(Math.random() * 100);
-
       const film = {
         id: lastId + 1,
         name: newFilm.name,
@@ -29,6 +30,7 @@ const filmsSlice = createSlice({
     },
     updateFilms: (state, action) => {
       state.films = action.payload;
+      state.initialFilms = action.payload;
     },
     setIsWatched: (state, action) => {
       const data = action.payload;
@@ -77,14 +79,45 @@ const filmsSlice = createSlice({
         state.films = sorted;
       }
     },
+    searchFilm: (state, action) => {
+      const title = action.payload.searchTerm;
+      if (title != "") {
+        const result = state.films.filter((film) => film.name.toLocaleLowerCase().includes(title.toLocaleLowerCase()));
+
+        state.films = result.length > 0 ? result : state.initialFilms;
+      } else {
+        state.films = state.initialFilms;
+      }
+    },
+
+    updateFilmData: (state, action) => {
+      const { id, name, grade, img, isWatched, review } = action.payload;
+      const films = state.films;
+
+      const findFilm = films.findIndex((film) => film.id === id);
+
+      if (findFilm !== -1) {
+        films[findFilm] = {
+          ...films,
+          name: name,
+          grade: grade,
+          img: img,
+          isWatched: isWatched,
+          review: review,
+          id: id,
+        };
+      }
+    },
   },
 });
 
-export const { setIsWatched, addReview, setGrade, updateFilms, addNewFilm, filterFilms } = filmsSlice.actions;
+export const { setIsWatched, addReview, setGrade, updateFilms, addNewFilm, filterFilms, searchFilm, updateFilmData } =
+  filmsSlice.actions;
 
 export default filmsSlice;
 
 interface initialStore extends FilmsListProps {
   isChanged: boolean;
   imagePlaceholder: string;
+  initialFilms: [];
 }

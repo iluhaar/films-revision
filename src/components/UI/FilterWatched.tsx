@@ -20,7 +20,7 @@ const FilterWatched = () => {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
+      <FormControl sx={{ minWidth: "245px" }}>
         <InputLabel id="watched-filter">Filter</InputLabel>
         <Select
           labelId="watched-filter"

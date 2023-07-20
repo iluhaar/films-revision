@@ -1,3 +1,5 @@
+import type { ChangeEvent } from "react";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -6,9 +8,10 @@ import { RootState } from "../../store/store";
 
 import usePagination from "../../hooks/Paganation";
 
-import { ListItemAvatar, ListItemText, Pagination, List, ListItem, Divider } from "@mui/material";
+import { ListItemAvatar, ListItemText, Pagination, List, ListItem, Divider, Box, Container } from "@mui/material";
 import { FilmPosterComponent } from "../FilmPosterComponent/FilmPosterComponent";
 import FilterWatched from "../UI/FilterWatched";
+import SearchComponent from "../UI/SearchComponent/SearchComponent";
 
 const FilmsList = ({ films }: FilmsListProps) => {
   const { imagePlaceholder } = useSelector((state: RootState) => state.films);
@@ -18,9 +21,9 @@ const FilmsList = ({ films }: FilmsListProps) => {
   const PER_PAGE = 24;
 
   const count = Math.ceil(films.length / PER_PAGE);
-  const _DATA: any = usePagination(films, PER_PAGE);
+  const _DATA = usePagination(films, PER_PAGE);
 
-  const handleChange = (e: any, p: any) => {
+  const handleChange = (e: ChangeEvent<unknown>, p: number) => {
     e.preventDefault();
 
     setPage(p);
@@ -31,12 +34,11 @@ const FilmsList = ({ films }: FilmsListProps) => {
 
   return (
     <>
-      {paginationData.length > 1 && (
-        <>
+      {paginationData.length > 0 && (
+        <Container fixed sx={{ width: "100%" }}>
           <List
             sx={{
               width: "100%",
-              maxWidth: "75vw",
               marginTop: "10rem",
               bgcolor: "black",
               display: "flex",
@@ -46,9 +48,15 @@ const FilmsList = ({ films }: FilmsListProps) => {
               justifyContent: "center",
               padding: "5rem",
               height: "auto",
+              minWidth: "100%",
+              minHeight: "560px",
             }}
           >
-            <FilterWatched />
+            <Box sx={{ width: "100%", display: "flex", flexDirection: "row", gap: "1rem" }}>
+              <FilterWatched />
+              <SearchComponent />
+              <br />
+            </Box>
 
             {paginationData.map((film: FilmProps) => (
               <Link key={film.id} to={film.id.toString()}>
@@ -71,9 +79,16 @@ const FilmsList = ({ films }: FilmsListProps) => {
             ))}
           </List>
           <div className="pagination__wrapper">
-            <Pagination count={count} page={page} onChange={handleChange} color="primary" />
+            <Pagination
+              count={count}
+              page={page}
+              onChange={handleChange}
+              color="primary"
+              showFirstButton
+              showLastButton
+            />
           </div>
-        </>
+        </Container>
       )}
     </>
   );
