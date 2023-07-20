@@ -21,6 +21,7 @@ const LoginComponent = () => {
           placeholder="Email.."
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          required
         />
         <input
           type="password"
@@ -28,6 +29,7 @@ const LoginComponent = () => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          required
         />
 
         <button>Login</button>
