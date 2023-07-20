@@ -1,0 +1,11 @@
+.edit__wrapper {
+  display: flex;
+  gap: 3rem;
+  padding-bottom: 2rem;
+  color: #f3f3f3;
+}
+
+.addNew__button {
+  position: absolute;
+  background-color: #61dafbaa;
+}
