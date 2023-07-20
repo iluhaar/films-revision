@@ -40,12 +40,7 @@ export const FilmPosterComponent = ({ src, alt, isWatched, showImage, page }: Fi
     <Stack direction="row" spacing={2}>
       {page === "details" ? (
         <div style={{ paddingTop: "1rem" }}>
-          <img
-            src={`${src}?w=164&h=150&fit=crop&auto=format`}
-            srcSet={`${src}?w=164&h=150&fit=crop&auto=format&dpr=2 2x`}
-            alt={alt}
-            width="250px"
-          />
+          <img src={`${src}`} srcSet={`${src}`} alt={alt} width="250px" />
         </div>
       ) : (
         <StyledBadge
