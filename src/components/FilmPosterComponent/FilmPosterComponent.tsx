@@ -8,6 +8,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     backgroundColor: "#44b700",
     color: "#44b700",
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    zIndex: "auto",
     "&::after": {
       position: "absolute",
       top: 0,
@@ -37,25 +38,30 @@ export const FilmPosterComponent = ({ src, alt, isWatched, showImage, page }: Fi
 
   return (
     <Stack direction="row" spacing={2}>
-      <StyledBadge overlap="circular" anchorOrigin={{ vertical: "bottom", horizontal: "right" }} variant={variant}>
-        {page === "details" ? (
-          <div style={{ paddingTop: "1rem" }}>
-            <img
-              src={`${src}?w=164&h=150&fit=crop&auto=format`}
-              srcSet={`${src}?w=164&h=150&fit=crop&auto=format&dpr=2 2x`}
-              alt={alt}
-              width="250px"
-            />
-          </div>
-        ) : (
+      {page === "details" ? (
+        <div style={{ paddingTop: "1rem" }}>
+          <img
+            src={`${src}?w=164&h=150&fit=crop&auto=format`}
+            srcSet={`${src}?w=164&h=150&fit=crop&auto=format&dpr=2 2x`}
+            alt={alt}
+            width="250px"
+          />
+        </div>
+      ) : (
+        <StyledBadge
+          overlap="circular"
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          variant={variant}
+          sx={{ zIndex: "auto" }}
+        >
           <Avatar
             alt={alt}
             src={src}
             sx={{ width: 56, height: 56 }}
             onClick={() => showImage !== undefined && showImage(true)}
           />
-        )}
-      </StyledBadge>
+        </StyledBadge>
+      )}
     </Stack>
   );
 };
@@ -65,5 +71,5 @@ interface FilmPosterComponent {
   alt: string;
   isWatched: boolean;
   showImage?: (arg: boolean) => void;
-  page: string;
+  page?: string;
 }

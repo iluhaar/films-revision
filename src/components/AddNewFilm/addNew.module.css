@@ -1,0 +1,10 @@
+.addNew__wrapper {
+  display: flex;
+  gap: 3rem;
+  padding-bottom: 2rem;
+}
+
+.addNew__button {
+  position: absolute;
+  background-color: #61dafbaa;
+}
