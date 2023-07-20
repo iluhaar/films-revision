@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { updateFilms } from "../reducers/filmsSlice";
 import { showNotification } from "../reducers/uiSlice";
 import { Dispatch } from "@reduxjs/toolkit";
-export const getFilms = () => {
+
+export const getFilms = (): any => {
   return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
       const response = await fetch("https://films-revision-default-rtdb.firebaseio.com/films.json");
@@ -22,6 +24,7 @@ export const getFilms = () => {
 
       dispatch(
         showNotification({
+          show: true,
           status: "success",
           title: "Success",
           message: "Fetched films data successfully!",
@@ -31,6 +34,7 @@ export const getFilms = () => {
     } catch (error) {
       dispatch(
         showNotification({
+          show: true,
           status: "error",
           title: "Error",
           message: "Failed to fetch films data!",
@@ -41,7 +45,7 @@ export const getFilms = () => {
   };
 };
 
-export const sendFilms = (films: FilmsListProps) => {
+export const sendFilms = (films: FilmProps[]): any => {
   return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
       const response = await fetch("https://films-revision-default-rtdb.firebaseio.com/films.json", {
@@ -62,6 +66,7 @@ export const sendFilms = (films: FilmsListProps) => {
 
       dispatch(
         showNotification({
+          show: true,
           status: "success",
           title: "Success",
           message: "Film review is updated",
@@ -71,6 +76,7 @@ export const sendFilms = (films: FilmsListProps) => {
     } catch (error) {
       dispatch(
         showNotification({
+          show: true,
           status: "error",
           title: "Error",
           message: "Failed to send films data!",
