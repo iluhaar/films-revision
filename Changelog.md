@@ -2,6 +2,11 @@
 
 [Added]
 
+- added ability to Edit film data (now you can update the poster)
+- more ui changes
+
+[Added]
+
 - added `SearchComponent`;
 - added `useDebounce`;
 - update the `filmSlice` to search in films/serieses
