@@ -1,11 +1,13 @@
 import type { SyntheticEvent } from "react";
 import { useState } from "react";
 
-import { Box, Checkbox, TextField, FormControlLabel } from "@mui/material";
+import { Box, Checkbox, TextField, FormControlLabel, Typography } from "@mui/material";
 
 import ModalWrapper from "../UI/Modals/Modal";
 import { useDispatch } from "react-redux";
 import { addNewFilm } from "../../store/reducers/filmsSlice";
+
+import styles from "./addNew.module.css";
 
 const AddNewFilm = () => {
   const [filmName, setFilmName] = useState("");
@@ -34,7 +36,10 @@ const AddNewFilm = () => {
       {isOpen && (
         <ModalWrapper setIsOpen={setIsOpen}>
           <Box component="form" onSubmit={handlerSubmit}>
-            <div>
+            <Typography variant="h3" sx={{ color: "#f3f3f3", paddingBottom: "1rem" }}>
+              Add new film or series
+            </Typography>
+            <div className={styles.addNew__wrapper}>
               <TextField
                 required
                 id="outlined-required"
@@ -69,7 +74,7 @@ const AddNewFilm = () => {
               )}
             </div>
           </Box>
-          <button>Add new film/series</button>
+          <button className={styles.addNew__button}>Add new film/series</button>
         </ModalWrapper>
       )}
     </>
