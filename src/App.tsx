@@ -21,13 +21,15 @@ function App() {
 
   const dispatch = useDispatch();
 
+  const mockedFilms = filmsMocked as FilmProps[];
+
   if (isInit) {
     dispatch(getFilms());
     isInit = false;
   }
 
   if (films === null) {
-    dispatch(sendFilms(filmsMocked));
+    dispatch(sendFilms(mockedFilms));
   }
 
   if (isChanged) {
