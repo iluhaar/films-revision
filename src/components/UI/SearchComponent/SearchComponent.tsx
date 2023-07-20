@@ -26,8 +26,6 @@ const SearchComponent = () => {
         variant="filled"
         sx={{
           backgroundColor: "#61dafbaa",
-          borderRadius: "15px",
-          border: 0,
         }}
         onChange={handleChange}
         value={search}
